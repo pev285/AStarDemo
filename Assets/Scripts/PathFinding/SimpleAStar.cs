@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,9 +7,16 @@ namespace AStarDemo.PathFinding
 {
 	public class SimpleAStar : IPathFinder
 	{
-		public IReadOnlyList<Vector2Int> GetPath(Vector2Int start, Vector2Int destination, IMapData data)
+		public event Action SearchCompleted = () => { };
+
+		public IMapData GetResults()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
+		}
+
+		public void StartSearch(IMapData data)
+		{
+			throw new NotImplementedException();
 		}
 	}
 } 

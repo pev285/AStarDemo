@@ -7,20 +7,26 @@ namespace AStarDemo.PathFinding
 {
 	public class SimpleMapData : IMapData
 	{
-		public int Width { get; }
-		public int Height { get; }
+		public int Width => throw new NotImplementedException();
 
-		public float GetStepPrice(Vector2Int start, Vector2Int destination)
+		public int Height => throw new NotImplementedException();
+
+		public Vector2Int Start => throw new NotImplementedException();
+
+		public Vector2Int Destination => throw new NotImplementedException();
+
+		public MapCodes[,] Map => throw new NotImplementedException();
+
+		public MapCodes GetValueIn(int x, int y)
 		{
 			throw new NotImplementedException();
 		}
 
-		public float GetEstimation(Vector2Int start, Vector2Int destination)
+		public MapCodes GetValueIn(Vector2Int cell)
 		{
 			throw new NotImplementedException();
 		}
-
-	} 
+	}
 } 
 
 

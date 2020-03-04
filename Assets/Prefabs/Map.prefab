@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7506573049985703729}
   - component: {fileID: 2015982030}
   m_Layer: 0
-  m_Name: ColoredCells
+  m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2616c6f7f2df6a24281394c297f99d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _obstacleColor: {r: 1, g: 0, b: 0.782177, a: 0}
-  _backgroundColor: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 0}
-  _startColor: {r: 0, g: 0, b: 0, a: 0}
-  _destinationColor: {r: 0, g: 0, b: 0, a: 0}
+  _obstacleColor: {r: 1, g: 0, b: 0, a: 1}
+  _backgroundColor: {r: 0.79294235, g: 0.9716981, b: 0.95141214, a: 1}
+  _startColor: {r: 0, g: 0.19871949, b: 0.6981132, a: 1}
+  _destinationColor: {r: 0.75201064, g: 0.0990566, b: 1, a: 1}
+  _pathColor: {r: 0.43654326, g: 0.8490566, b: 0.5118194, a: 1}

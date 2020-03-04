@@ -1,4 +1,5 @@
-﻿using AStarDemo.PathFinding;
+﻿using AStarDemo.Global;
+using AStarDemo.PathFinding;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,14 +11,17 @@ namespace AStarDemo.Visualization
     public class MapController : MonoBehaviour
     {
         [SerializeField]
-        private Color _obstacleColor;
+        private Color _obstacleColor = Color.red;
         [SerializeField]
-        private Color _backgroundColor;
+        private Color _backgroundColor = Color.gray;
 
         [SerializeField]
-        private Color _startColor;
+        private Color _startColor = Color.blue;
         [SerializeField]
-        private Color _destinationColor;
+        private Color _destinationColor = Color.magenta;
+
+        [SerializeField]
+        private Color _pathColor = Color.green;
 
         private ColoredCells _map;
 
@@ -28,8 +32,7 @@ namespace AStarDemo.Visualization
 
         private void Start()
         {
-            _map.GenerateGrid();
-            _map.Fill(_backgroundColor);
+            Clear();
         }
 
         //--- Temporary ---
@@ -44,6 +47,13 @@ namespace AStarDemo.Visualization
             }
         }
         //--------------------------
+
+        public void Clear()
+        {
+            _map.ClearGrid();
+            _map.GenerateGrid();
+            _map.Fill(_backgroundColor);
+        }
 
         public IMapData GetData()
         {

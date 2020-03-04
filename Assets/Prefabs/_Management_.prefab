@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6255637332777921202}
   - component: {fileID: 6255637332777921203}
   - component: {fileID: 6255637332777921200}
-  - component: {fileID: 6255637332777921201}
+  - component: {fileID: 217498543689933108}
   m_Layer: 0
   m_Name: _Management_
   m_TagString: Untagged
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 6255637332907242788}
---- !u!114 &6255637332777921201
+--- !u!114 &217498543689933108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,9 +69,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6255637332777921204}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 425a35dd399e88140b1ed04b1e2b5b6c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ca7afafb4502fa4795d117136e3eb87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MapPrefab: {fileID: 7506573049985703728, guid: 12f05db9bd12cc2489457ec192db3590,
+    type: 3}
 --- !u!1 &6255637332907242790
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,13 +115,12 @@ Camera:
   m_GameObject: {fileID: 6255637332907242790}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
+  m_GateFitMode: 2
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2

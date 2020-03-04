@@ -3,11 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AStarDemo
+namespace AStarDemo.Global
 
 {
     public static class MessageBuss
     {
+        public static class Global
+        {
+            public static Action<SystemState> SystemStateChanged = (a) => { };
+        }
+
         public static class Input
         {
             public static Func<bool> GetTouch = () => false;
@@ -18,6 +23,8 @@ namespace AStarDemo
             public static Action OnObstacklesPlacementFinished = () => { };
             public static Action OnStartPlaced = () => { };
             public static Action OnFinishPlaced = () => { };
+
+
         }
 
         public static class Screen

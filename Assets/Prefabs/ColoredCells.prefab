@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7506573049985703730}
   - component: {fileID: 7506573049985703729}
+  - component: {fileID: 2015982030}
   m_Layer: 0
   m_Name: ColoredCells
   m_TagString: Untagged
@@ -43,6 +44,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f491f7279b8e042439b682d581ba02e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dimension: 50
-  CellPrefab: {fileID: 5992018355011064202, guid: 3fba7f927ec340f4899a02ff1a827832,
+  Dim: 50
+  CellPrefab: {fileID: 8419613104696453198, guid: 7c9d317652fb47140baa5d00fe925ff1,
     type: 3}
+  CellScale: 0.9
+--- !u!114 &2015982030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7506573049985703728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2616c6f7f2df6a24281394c297f99d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _obstacleColor: {r: 1, g: 0, b: 0.782177, a: 0}
+  _backgroundColor: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 0}
+  _startColor: {r: 0, g: 0, b: 0, a: 0}
+  _destinationColor: {r: 0, g: 0, b: 0, a: 0}

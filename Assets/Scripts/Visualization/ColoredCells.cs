@@ -7,57 +7,71 @@ namespace AStarDemo.Visualization
 {
     public class ColoredCells : MonoBehaviour
     {
-        public int Dimension = 50;
+        public int Dim = 50;
+
         public Transform CellPrefab;
+        public float CellScale = 0.9f;
 
         private Cell[,] _cells;
         private Transform _transform;
 
-        private float _cellSize;
-        private float _cellPartSize;
+        private float _viewCellSize;
+        private float _worldCellSize;
 
         private void Awake()
         {
             _transform = transform; 
         }
 
-        private void Start()
+
+        public Vector2Int GetCoordsByViewPoint(Vector2 point)
         {
-            GenerateGrid();
+            var ix = (int)(point.x / _viewCellSize);
+            var iy = (int)(point.y / _viewCellSize);
+
+            return new Vector2Int(ix, iy);
         }
 
-        private void Update()
+        public void SetCellColor(Vector2Int pos, Color color)
         {
-            if (MessageBuss.Input.GetTouch())
-            {
-                var point = MessageBuss.Input.GetTouchPosition();
+            SetCellColor(pos.x, pos.y, color);
+        }
 
-                int ix = (int)(point.x / _cellPartSize);
-                var iy = (int)(point.y / _cellPartSize);
+        public void SetCellColor(int ix, int iy, Color color)
+        {
+            if (ix < 0 || ix >= Dim)
+                return;
 
-                //Debug.Log($"{point} / {_cellPartSize} => {ix},{iy}");
+            if (iy < 0 || iy >= Dim)
+                return;
 
-                _cells[ix, iy].SetColor(Color.red);
-            }
+            _cells[ix, iy].SetColor(color);
+        }
+
+        public void Fill(Color color)
+        {
+            for (int ix = 0; ix < Dim; ix++)
+                for (int iy = 0; iy < Dim; iy++)
+                    SetCellColor(ix, iy, color);
         }
 
         public void GenerateGrid()
         {
-            _cellPartSize = 1f / Dimension;
-            _cells = new Cell[Dimension, Dimension];
+            _viewCellSize = 1f / Dim;
+            _cells = new Cell[Dim, Dim];
 
             var size = Mathf.Min(MessageBuss.Screen.GetWorldHeight(), MessageBuss.Screen.GetWorldWidth());
             var halfSize = 0.5f * size;
 
-            _cellSize = size / Dimension;
-            var cellScale = new Vector3(_cellSize, _cellSize, _cellSize);
+            _worldCellSize = size / Dim;
+            var cellScale = _worldCellSize * CellScale * Vector3.one;
 
-            var bottomLeft = new Vector2(-0.5f * (size - _cellSize), -0.5f * (size - _cellSize));
+            var bottomLeft = new Vector2(-0.5f * (size - _worldCellSize), -0.5f * (size - _worldCellSize));
 
-            for (int ix = 0; ix < Dimension; ix++)
-                for (int iy = 0; iy < Dimension; iy++)
+            for (int ix = 0; ix < Dim; ix++)
+                for (int iy = 0; iy < Dim; iy++)
                 {
-                    var position = bottomLeft + new Vector2(ix * _cellSize, iy * _cellSize);
+                    var position = bottomLeft + new Vector2(ix * _worldCellSize, iy * _worldCellSize);
                     var cellTransform = Instantiate<Transform>(CellPrefab, position, Quaternion.identity);
 
                     cellTransform.SetParent(_transform);
@@ -68,6 +82,14 @@ namespace AStarDemo.Visualization
                 }
         }
 
+        public void ClearGrid()
+        {
+            for (int ix = 0; ix < Dim; ix++)
+                for (int iy = 0; iy < Dim; iy++)
+                    Destroy(_cells[ix, iy].gameObject);
+
+            _cells = null;
+        }
     }
 }
 

@@ -17,6 +17,7 @@ namespace AStarDemo.Visualization
 		public void SetColor(Color color)
 		{
 			_renderer.material.color = color;
+			//_renderer.material.SetFloat("_Metallic", 0.5f);
 		}
 	
 	} 

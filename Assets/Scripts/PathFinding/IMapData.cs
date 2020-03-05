@@ -14,8 +14,8 @@ namespace AStarDemo.PathFinding
 
 		MapCodes[,] Map { get; }
 
-		MapCodes GetValueIn(int x, int y);
-		MapCodes GetValueIn(Vector2Int cell);
+		MapCodes Get(int x, int y);
+		MapCodes Get(Vector2Int cell);
 	} 
 } 
 

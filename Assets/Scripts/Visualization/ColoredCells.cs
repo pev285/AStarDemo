@@ -56,7 +56,7 @@ namespace AStarDemo.Visualization
                     SetCellColor(ix, iy, color);
         }
 
-        public void GenerateGrid()
+        public void Create()
         {
             _viewCellSize = 1f / Dim;
             _cells = new Cell[Dim, Dim];
@@ -83,8 +83,11 @@ namespace AStarDemo.Visualization
                 }
         }
 
-        public void ClearGrid()
+        public void Remove()
         {
+            if (_cells == null)
+                return;
+
             for (int ix = 0; ix < Dim; ix++)
                 for (int iy = 0; iy < Dim; iy++)
                     Destroy(_cells[ix, iy].gameObject);

@@ -12,8 +12,8 @@ namespace AStarDemo.PathFinding
 		Destination = 3,
 		PathPoint = 4,
 
-		EvaluatedCell = 5,
-		CandidateCell = 6,
+		Candidate = 5,
+		Evaluated = 6,
 	} 
 } 
 

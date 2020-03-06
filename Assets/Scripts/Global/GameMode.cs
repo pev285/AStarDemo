@@ -16,7 +16,7 @@ namespace AStarDemo.Global
 		private SystemState _state;
 		private MapController _map;
 
-		private IPathFinder _searcher;
+		private IPathFinder _searcher = new SimpleAStar();
 
 		private void Awake()
 		{
@@ -27,6 +27,31 @@ namespace AStarDemo.Global
 		private void Start()
 		{
 			Reset();
+
+			MessageBuss.Input.StartOver += Reset;
+			MessageBuss.Input.NextStage += GoToNextState;
+		}
+
+		private void OnDestroy()
+		{
+			MessageBuss.Input.StartOver -= Reset;
+			MessageBuss.Input.NextStage -= GoToNextState;
+		}
+
+		private void GoToNextState()
+		{
+			switch (_state)
+			{
+				case SystemState.LocateObstacles:
+					TransitionTo(SystemState.LocateStart);
+					break;
+				case SystemState.LocateStart:
+					TransitionTo(SystemState.LocateDestination);
+					break;
+				case SystemState.LocateDestination:
+					TransitionTo(SystemState.LookForBestPath);
+					break;
+			}
 		}
 
 		private void TransitionTo(SystemState state)
@@ -37,10 +62,18 @@ namespace AStarDemo.Global
 
 		private void Reset()
 		{
+			_searcher.Stop();
+			_searcher.SearchCompleted -= ShowResults;
+
 			_map.Clear();
 			TransitionTo(SystemState.LocateObstacles);
 		}
 
+		private void ShowResults()
+		{
+			_searcher.SearchCompleted -= ShowResults;
+			TransitionTo(SystemState.ShowResults);
+		}
 
 		private void Update()
 		{
@@ -68,31 +101,37 @@ namespace AStarDemo.Global
 
 		private void UpdateShowResults()
 		{
-			throw new NotImplementedException();
+			// Simply showing //
 		}
 
 		private void UpdateLookForBestPath()
 		{
-			throw new NotImplementedException();
+			if (_searcher.IsInProgress)
+				return;
+
+			var data = _map.GetData();
+			_searcher.SearchCompleted += ShowResults;
+
+			_searcher.Start(data);
 		}
 
 		private void UpdateLocateDestination()
 		{
-			throw new NotImplementedException();
 		}
 
 		private void UpdateLocateStart()
 		{
-			throw new NotImplementedException();
 		}
 
 		private void UpdateLocateObstacles()
 		{
-			throw new NotImplementedException();
+			if (MessageBuss.Input.GetTouch())
+			{
+				var point = MessageBuss.Input.GetTouchPosition();
+				_map.SetObstacle(point);
+			}
 		}
-
-
-	} 
+	}
 } 
 
 

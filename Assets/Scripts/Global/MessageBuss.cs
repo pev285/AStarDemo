@@ -20,11 +20,9 @@ namespace AStarDemo.Global
 
             public static Func<Vector2> GetTouchPosition = () => Vector2.zero;
 
-            public static Action OnObstacklesPlacementFinished = () => { };
-            public static Action OnStartPlaced = () => { };
-            public static Action OnFinishPlaced = () => { };
-
-
+            public static Action NextStage = () => { };
+            public static Action StartOver = () => { };
+            //public static Action PreviousStage = () => { };
         }
 
         public static class Screen

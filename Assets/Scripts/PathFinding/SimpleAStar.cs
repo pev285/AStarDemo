@@ -9,13 +9,21 @@ namespace AStarDemo.PathFinding
 	{
 		public event Action SearchCompleted = () => { };
 
+		public bool IsInProgress { get; private set; } = false;
+
 		public IMapData GetResults()
 		{
 			throw new NotImplementedException();
 		}
 
-		public void StartSearch(IMapData data)
+		public void Stop()
 		{
+			IsInProgress = false;
+		}
+
+		public void Start(IMapData data)
+		{
+			IsInProgress = true;
 			throw new NotImplementedException();
 		}
 	}

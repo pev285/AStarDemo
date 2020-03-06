@@ -43,18 +43,6 @@ namespace AStarDemo.Visualization
             Clear();
         }
 
-        //--- Temporary ---
-        private void Update()
-        {
-            if (MessageBuss.Input.GetTouch())
-            {
-                var point = MessageBuss.Input.GetTouchPosition();
-                var coords = _mapVisualization.GetCoordsByViewPoint(point);
-
-                _mapVisualization.SetCellColor(coords, _obstacleColor);
-            }
-        }
-        //--------------------------
 
         public void Clear()
         {

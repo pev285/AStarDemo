@@ -9,7 +9,11 @@ namespace AStarDemo.PathFinding
 	{
 		event Action SearchCompleted;
 
-		void StartSearch(IMapData data);
+		bool IsInProgress { get; }
+
+		void Stop();
+		void Start(IMapData data);
+
 		IMapData GetResults();	
 	} 
 } 

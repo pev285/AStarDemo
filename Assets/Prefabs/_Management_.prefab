@@ -74,6 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MapPrefab: {fileID: 7506573049985703728, guid: 12f05db9bd12cc2489457ec192db3590,
     type: 3}
+  UIPrefab: {fileID: 699208731444617230, guid: 991ab51987cefa4439ac7ebffe8cb135, type: 3}
 --- !u!1 &6255637332907242790
 GameObject:
   m_ObjectHideFlags: 0

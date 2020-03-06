@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AStarDemo
+namespace AStarDemo.UserInteractions
 {
 	public class PlayerController : MonoBehaviour 
 	{
@@ -29,13 +29,6 @@ namespace AStarDemo
 			MessageBuss.Input.GetTouch -= GetToucch;
 			MessageBuss.Input.GetTouchDown -= GetTouchDown;
 		}
-
-		//private void Update()
-		//{
-		//	var point = GetPoint();
-		//	Debug.Log($"point={point}");
-
-		//}
 
 		private bool GetTouchDown()
 		{

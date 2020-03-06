@@ -12,6 +12,8 @@ namespace AStarDemo.Global
 
 		[SerializeField]
 		private GameObject MapPrefab;
+		[SerializeField]
+		private GameObject UIPrefab;
 
 		private SystemState _state;
 		private MapController _map;
@@ -22,6 +24,8 @@ namespace AStarDemo.Global
 		{
 			var obj = Instantiate(MapPrefab);
 			_map = obj.GetComponent<MapController>();
+
+			Instantiate(UIPrefab);
 		}
 
 		private void Start()
@@ -117,10 +121,20 @@ namespace AStarDemo.Global
 
 		private void UpdateLocateDestination()
 		{
+			if (MessageBuss.Input.GetTouch())
+			{
+				var point = MessageBuss.Input.GetTouchPosition();
+				_map.SetDestination(point);
+			}
 		}
 
 		private void UpdateLocateStart()
 		{
+			if (MessageBuss.Input.GetTouch())
+			{
+				var point = MessageBuss.Input.GetTouchPosition();
+				_map.SetStart(point);
+			}
 		}
 
 		private void UpdateLocateObstacles()

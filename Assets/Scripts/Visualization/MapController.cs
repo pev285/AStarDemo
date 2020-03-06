@@ -63,32 +63,44 @@ namespace AStarDemo.Visualization
         public void SetObstacle(Vector2 position)
         {
             var coords = _mapVisualization.GetCoordsByViewPoint(position);
-            _map.SetObstacle(coords);
 
+            if (IsValidCell(coords) == false)
+                return;
+
+            _map.SetObstacle(coords);
             ColorACell(position, _obstacleColor);
         }
 
         public void SetStart(Vector2 position)
         {
             var coords = _mapVisualization.GetCoordsByViewPoint(position);
-            _map.SetStart(coords);
 
+            if (IsValidCell(coords) == false)
+                return;
+
+            _map.SetStart(coords);
             ColorACell(position, _startColor);
         }
 
         public void SetDestination(Vector2 position)
         {
             var coords = _mapVisualization.GetCoordsByViewPoint(position);
-            _map.SetDestination(coords);
 
+            if (IsValidCell(coords) == false)
+                return;
+
+            _map.SetDestination(coords);
             ColorACell(position, _destinationColor);
         }
 
         public void ClearCell(Vector2 position)
         {
             var coords = _mapVisualization.GetCoordsByViewPoint(position);
-            _map.ClearCell(coords);
 
+            if (IsValidCell(coords) == false)
+                return;
+
+            _map.ClearCell(coords);
             ColorACell(position, _backgroundColor);
         }
 
@@ -96,6 +108,17 @@ namespace AStarDemo.Visualization
         {
             var coords = _mapVisualization.GetCoordsByViewPoint(position);
             _mapVisualization.SetCellColor(coords, color);
+        }
+
+        public bool IsValidCell(Vector2Int coords)
+        {
+            if (0 > coords.x || coords.x >= _dim)
+                return false;
+
+            if (0 > coords.y || coords.y >= _dim)
+                return false;
+
+            return true;
         }
     }
 }

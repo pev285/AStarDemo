@@ -68,7 +68,7 @@ namespace AStarDemo.Visualization
                 return;
 
             _map.SetObstacle(coords);
-            ColorACell(position, _obstacleColor);
+            ColorACell(coords, _obstacleColor);
         }
 
         public void SetStart(Vector2 position)
@@ -78,8 +78,11 @@ namespace AStarDemo.Visualization
             if (IsValidCell(coords) == false)
                 return;
 
+            if (_map.Start.HasValue)
+                ColorACell(_map.Start.Value, _backgroundColor);
+
             _map.SetStart(coords);
-            ColorACell(position, _startColor);
+            ColorACell(coords, _startColor);
         }
 
         public void SetDestination(Vector2 position)
@@ -89,24 +92,26 @@ namespace AStarDemo.Visualization
             if (IsValidCell(coords) == false)
                 return;
 
+            if (_map.Destination.HasValue)
+                ColorACell(_map.Destination.Value, _backgroundColor);
+
             _map.SetDestination(coords);
-            ColorACell(position, _destinationColor);
+            ColorACell(coords, _destinationColor);
         }
 
-        public void ClearCell(Vector2 position)
+        //public void ClearCell(Vector2 position)
+        //{
+        //    var coords = _mapVisualization.GetCoordsByViewPoint(position);
+
+        //    if (IsValidCell(coords) == false)
+        //        return;
+
+        //    _map.ClearCell(coords);
+        //    ColorACell(coords, _backgroundColor);
+        //}
+
+        private void ColorACell(Vector2Int coords, Color color)
         {
-            var coords = _mapVisualization.GetCoordsByViewPoint(position);
-
-            if (IsValidCell(coords) == false)
-                return;
-
-            _map.ClearCell(coords);
-            ColorACell(position, _backgroundColor);
-        }
-
-        private void ColorACell(Vector2 position, Color color)
-        {
-            var coords = _mapVisualization.GetCoordsByViewPoint(position);
             _mapVisualization.SetCellColor(coords, color);
         }
 

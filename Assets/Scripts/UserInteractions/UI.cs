@@ -17,6 +17,16 @@ namespace AStarDemo.UserInteractions
 		[SerializeField]
 		private Text _stateText;
 
+		private Dictionary<SystemState, string> _hints = new Dictionary<SystemState, string>
+		{
+			{ SystemState.LocateObstacles, "Расставьте препятствия" },
+			{ SystemState.LocateStart, "Выберите место для старта" },
+			{ SystemState.LocateDestination, "Выберите место для финиша" },
+			{ SystemState.LookForBestPath, "Ведутся рассчеты" },
+			{ SystemState.ShowResults, "Готово!!!" },
+			{ SystemState.SearchFailed, "Не удалось найти подходящий путь :(" },
+		};
+
 		private void Awake()
 		{
 			MessageBuss.Global.SystemStateChanged += HandleStateChange;
@@ -30,7 +40,7 @@ namespace AStarDemo.UserInteractions
 
 		private void HandleStateChange(SystemState state)
 		{
-			_stateText.text = state.ToString();
+			_stateText.text = _hints[state];
 		}
 
 		private void NotifyStartOver()

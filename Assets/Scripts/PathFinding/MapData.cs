@@ -10,33 +10,34 @@ namespace AStarDemo.PathFinding
 
 		public int Height { get; }
 
-		public Vector2Int Start 
-		{ 
-			get
-			{
-				if (_start.HasValue)
-					return _start.Value;
+		//public Vector2Int Start 
+		//{ 
+		//	get
+		//	{
+		//		if (_start.HasValue)
+		//			return _start.Value;
 
-				return Vector2Int.zero;
-			}
-		}
+		//		return Vector2Int.zero;
+		//	}
+		//}
 
-		public Vector2Int Destination
-		{
-			get
-			{
-				if (_destination.HasValue)
-					return _destination.Value;
+		//public Vector2Int Destination
+		//{
+		//	get
+		//	{
+		//		if (_destination.HasValue)
+		//			return _destination.Value;
 
-				return Vector2Int.zero;
-			}
-		}
+		//		return Vector2Int.zero;
+		//	}
+		//}
 
 		public MapCodes[,] Map { get; }
 
 
-		private Vector2Int? _start;
-		private Vector2Int? _destination;
+
+		public Vector2Int? Start { get; private set; }
+		public Vector2Int? Destination { get; private set; }
 
 		public MapCodes Get(int x, int y)
 		{
@@ -59,8 +60,8 @@ namespace AStarDemo.PathFinding
 
 		public void Clear()
 		{
-			_start = null;
-			_destination = null;
+			Start = null;
+			Destination = null;
 
 			for (int ix = 0; ix < Width; ix++)
 				for (int iy = 0; iy < Height; iy++)
@@ -75,19 +76,19 @@ namespace AStarDemo.PathFinding
 
 		public void SetStart(Vector2Int position)
 		{
-			if (_start.HasValue)
-				ClearCell(_start.Value);
+			if (Start.HasValue)
+				ClearCell(Start.Value);
 
-			_start = position;
+			Start = position;
 			Set(position, MapCodes.Start);
 		}
 
 		public void SetDestination(Vector2Int position)
 		{
-			if (_destination.HasValue)
-				ClearCell(_destination.Value);
+			if (Destination.HasValue)
+				ClearCell(Destination.Value);
 
-			_destination = position;
+			Destination = position;
 			Set(position, MapCodes.Destination);
 		}
 

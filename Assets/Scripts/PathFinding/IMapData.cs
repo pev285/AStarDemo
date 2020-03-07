@@ -9,8 +9,8 @@ namespace AStarDemo.PathFinding
 		int Width { get; }
 		int Height { get; }
 
-		Vector2Int Start { get; }
-		Vector2Int Destination { get; }
+		Vector2Int? Start { get; }
+		Vector2Int? Destination { get; }
 
 		MapCodes[,] Map { get; }
 

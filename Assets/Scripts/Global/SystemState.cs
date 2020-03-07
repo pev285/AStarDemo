@@ -11,6 +11,7 @@ namespace AStarDemo.Global
 		LocateDestination,
 		LookForBestPath,
 		ShowResults,
+		SearchFailed,
 	}
 } 
 

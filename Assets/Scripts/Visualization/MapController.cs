@@ -81,7 +81,22 @@ namespace AStarDemo.Visualization
         {
             var coords = _mapVisualization.GetCoordsByViewPoint(position);
 
+            SetStartCell(coords);
+        }
+
+        public void SetDestination(Vector2 position)
+        {
+            var coords = _mapVisualization.GetCoordsByViewPoint(position);
+
+            SetDestinationCell(coords);
+        }
+
+        public void SetStartCell(Vector2Int coords)
+        {
             if (_map.IsValidCell(coords) == false)
+                return;
+
+            if (_map.Get(coords) != MapCodes.Empty)
                 return;
 
             if (_map.Start.HasValue)
@@ -91,11 +106,12 @@ namespace AStarDemo.Visualization
             ColorACell(coords, _startColor);
         }
 
-        public void SetDestination(Vector2 position)
+        public void SetDestinationCell(Vector2Int coords)
         {
-            var coords = _mapVisualization.GetCoordsByViewPoint(position);
-
             if (_map.IsValidCell(coords) == false)
+                return;
+
+            if (_map.Get(coords) != MapCodes.Empty)
                 return;
 
             if (_map.Destination.HasValue)

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f491f7279b8e042439b682d581ba02e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dim: 50
+  Dim: 5
   CellPrefab: {fileID: 8419613104696453198, guid: 7c9d317652fb47140baa5d00fe925ff1,
     type: 3}
   CellScale: 0.9
@@ -61,8 +61,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _obstacleColor: {r: 1, g: 0, b: 0, a: 1}
-  _backgroundColor: {r: 0.79294235, g: 0.9716981, b: 0.95141214, a: 1}
-  _startColor: {r: 1, g: 0, b: 0.9513707, a: 1}
-  _destinationColor: {r: 0, g: 0.990566, b: 0.12636241, a: 1}
-  _pathColor: {r: 0.8132907, g: 0.8509804, b: 0.43529412, a: 1}
+  _backgroundColor: {r: 0.83137256, g: 0.9529412, b: 0.93461305, a: 1}
+  _startColor: {r: 0.6886792, g: 0, b: 0.6562709, a: 1}
+  _destinationColor: {r: 0, g: 0.9245283, b: 0.11637411, a: 1}
+  _pathColor: {r: 0.40142858, g: 0.6132076, b: 0, a: 1}
+  _openedNodeColor: {r: 0.8679245, g: 0.86384267, b: 0.35617658, a: 1}
+  _closedNodeColor: {r: 0.735849, g: 0.6347345, b: 0.26032394, a: 1}
   _dim: 50

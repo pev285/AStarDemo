@@ -101,15 +101,17 @@ namespace AStarDemo.PathFinding
 				if (current != start)
 					PathNodeFound.Invoke(current);
 			}
+
+			_foundPath.Reverse();
 		}
 
 		private Vector2Int FindPreviousPathNode(Vector2Int point)
 		{
-			var stepCost = StraightCost;
 			var pointCost = _calculatedPaths[point.x, point.y];
 
 			foreach (var shift in _straightNeighbs)
 			{
+				var stepCost = StraightCost;
 				var neighbor = point + shift;
 			
 				if (IsPrevious(neighbor, pointCost, stepCost))
@@ -118,6 +120,7 @@ namespace AStarDemo.PathFinding
 
 			foreach (var shift in _diagNeighbs)
 			{
+				var stepCost = DiagCost;
 				var neighbor = point + shift;
 
 				if (IsPrevious(neighbor, pointCost, stepCost))

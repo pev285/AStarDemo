@@ -77,6 +77,10 @@ namespace AStarDemo.Global
 		{
 			UnsubscribeSearcher();
 
+			var data = _map.GetData();
+			_map.SetStartCell(data.Start.Value);
+			_map.SetDestinationCell(data.Destination.Value);
+
 			if (successful)
 				TransitionTo(SystemState.ShowResults);
 			else
@@ -87,22 +91,22 @@ namespace AStarDemo.Global
 		{
 			_searcher.SearchCompleted += DemonstraightSearchResults;
 
-			_searcher.NodeOpened += _searcher_NodeOpened;
-			_searcher.NodeClosed += _searcher_NodeClosed;
-			_searcher.PathNodeFound += _searcher_PathNodeFound;
+			_searcher.NodeOpened += DrawOpenedCell;
+			_searcher.NodeClosed += DrawClosedCell;
+			_searcher.PathNodeFound += DrawPathNode;
 		}
 
-		private void _searcher_PathNodeFound(Vector2Int coord)
+		private void DrawPathNode(Vector2Int coord)
 		{
 			_map.SetPathCell(coord);
 		}
 
-		private void _searcher_NodeClosed(Vector2Int coord)
+		private void DrawClosedCell(Vector2Int coord)
 		{
 			_map.SetClosedCell(coord);
 		}
 
-		private void _searcher_NodeOpened(Vector2Int coord)
+		private void DrawOpenedCell(Vector2Int coord)
 		{
 			_map.SetOpenedCell(coord);
 		}

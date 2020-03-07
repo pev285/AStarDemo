@@ -27,8 +27,8 @@ namespace AStarDemo.Visualization
 
         public Vector2Int GetCoordsByViewPoint(Vector2 point)
         {
-            var ix = (int)(point.x / _viewCellSize);
-            var iy = (int)(point.y / _viewCellSize);
+            var ix = Mathf.FloorToInt(point.x / _viewCellSize);
+            var iy = Mathf.FloorToInt(point.y / _viewCellSize);
 
             return new Vector2Int(ix, iy);
         }

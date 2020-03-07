@@ -22,8 +22,14 @@ namespace AStarDemo.Visualization
         [SerializeField]
         private Color _destinationColor = Color.magenta;
 
+        [Space]
         [SerializeField]
         private Color _pathColor = Color.green;
+
+        [SerializeField]
+        private Color _openedNodeColor = Color.grey;
+        [SerializeField]
+        private Color _closedNodeColor = Color.black;
 
         [Space]
         [SerializeField]
@@ -55,7 +61,7 @@ namespace AStarDemo.Visualization
             _mapVisualization.Fill(_backgroundColor);
         }
 
-        public IMapData GetData()
+        public MapData GetData()
         {
             return _map;
         }
@@ -64,7 +70,7 @@ namespace AStarDemo.Visualization
         {
             var coords = _mapVisualization.GetCoordsByViewPoint(position);
 
-            if (IsValidCell(coords) == false)
+            if (_map.IsValidCell(coords) == false)
                 return;
 
             _map.SetObstacle(coords);
@@ -75,7 +81,7 @@ namespace AStarDemo.Visualization
         {
             var coords = _mapVisualization.GetCoordsByViewPoint(position);
 
-            if (IsValidCell(coords) == false)
+            if (_map.IsValidCell(coords) == false)
                 return;
 
             if (_map.Start.HasValue)
@@ -89,7 +95,7 @@ namespace AStarDemo.Visualization
         {
             var coords = _mapVisualization.GetCoordsByViewPoint(position);
 
-            if (IsValidCell(coords) == false)
+            if (_map.IsValidCell(coords) == false)
                 return;
 
             if (_map.Destination.HasValue)
@@ -97,6 +103,21 @@ namespace AStarDemo.Visualization
 
             _map.SetDestination(coords);
             ColorACell(coords, _destinationColor);
+        }
+
+        public void SetOpenedCell(Vector2Int coords)
+        {
+            ColorACell(coords, _openedNodeColor);
+        }
+
+        public void SetClosedCell(Vector2Int coords)
+        {
+            ColorACell(coords, _closedNodeColor);
+        }
+
+        public void SetPathCell(Vector2Int coords)
+        {
+            ColorACell(coords, _pathColor);
         }
 
         //public void ClearCell(Vector2 position)
@@ -112,18 +133,10 @@ namespace AStarDemo.Visualization
 
         private void ColorACell(Vector2Int coords, Color color)
         {
+            if (_map.IsValidCell(coords) == false)
+                return;
+
             _mapVisualization.SetCellColor(coords, color);
-        }
-
-        public bool IsValidCell(Vector2Int coords)
-        {
-            if (0 > coords.x || coords.x >= _dim)
-                return false;
-
-            if (0 > coords.y || coords.y >= _dim)
-                return false;
-
-            return true;
         }
     }
 }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace AStarDemo.Global
-
 {
     public static class MessageBuss
     {
@@ -22,7 +21,6 @@ namespace AStarDemo.Global
 
             public static Action NextStage = () => { };
             public static Action StartOver = () => { };
-            //public static Action PreviousStage = () => { };
         }
 
         public static class Screen
@@ -31,9 +29,5 @@ namespace AStarDemo.Global
             public static Func<float> GetWorldHeight = () => 0;
             public static Func<float> GetMinDimension = () => 0;
         }
-
-
     }
 }
-
-

@@ -4,37 +4,13 @@ using UnityEngine;
 
 namespace AStarDemo.PathFinding 
 {
-	public class MapData : IMapData
+	public class MapData
 	{
 		public int Width { get; }
 
 		public int Height { get; }
 
-		//public Vector2Int Start 
-		//{ 
-		//	get
-		//	{
-		//		if (_start.HasValue)
-		//			return _start.Value;
-
-		//		return Vector2Int.zero;
-		//	}
-		//}
-
-		//public Vector2Int Destination
-		//{
-		//	get
-		//	{
-		//		if (_destination.HasValue)
-		//			return _destination.Value;
-
-		//		return Vector2Int.zero;
-		//	}
-		//}
-
 		public MapCodes[,] Map { get; }
-
-
 
 		public Vector2Int? Start { get; private set; }
 		public Vector2Int? Destination { get; private set; }
@@ -68,7 +44,6 @@ namespace AStarDemo.PathFinding
 					Map[ix, iy] = MapCodes.Empty;
 		}
 
-
 		public void SetObstacle(Vector2Int position)
 		{
 			Map[position.x, position.y] = MapCodes.Obstacle;
@@ -80,7 +55,6 @@ namespace AStarDemo.PathFinding
 				ClearCell(Start.Value);
 
 			Start = position;
-			Set(position, MapCodes.Start);
 		}
 
 		public void SetDestination(Vector2Int position)
@@ -89,7 +63,6 @@ namespace AStarDemo.PathFinding
 				ClearCell(Destination.Value);
 
 			Destination = position;
-			Set(position, MapCodes.Destination);
 		}
 
 		public void ClearCell(Vector2Int position)
@@ -97,9 +70,20 @@ namespace AStarDemo.PathFinding
 			Set(position, MapCodes.Empty);
 		}
 
-		private void Set(Vector2Int position, MapCodes value)
+		public void Set(Vector2Int position, MapCodes value)
 		{
 			Map[position.x, position.y] = value;
+		}
+
+		public bool IsValidCell(Vector2Int coords)
+		{
+			if (0 > coords.x || coords.x >= Width)
+				return false;
+
+			if (0 > coords.y || coords.y >= Height)
+				return false;
+
+			return true;
 		}
 	}
 } 

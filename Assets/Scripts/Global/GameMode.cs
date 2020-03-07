@@ -67,16 +67,49 @@ namespace AStarDemo.Global
 		private void Reset()
 		{
 			_searcher.Stop();
-			_searcher.SearchCompleted -= ShowResults;
+			UnsubscribeSearcher();
 
 			_map.Clear();
 			TransitionTo(SystemState.LocateObstacles);
 		}
 
-		private void ShowResults()
+		private void DemonstraightSearchResults(bool successful)
 		{
-			_searcher.SearchCompleted -= ShowResults;
-			TransitionTo(SystemState.ShowResults);
+			UnsubscribeSearcher();
+
+			if (successful)
+				TransitionTo(SystemState.ShowResults);
+			else
+				TransitionTo(SystemState.SearchFailed);
+		}
+
+		private void SubscribeSearcher()
+		{
+			_searcher.SearchCompleted += DemonstraightSearchResults;
+
+			_searcher.NodeOpened += _searcher_NodeOpened;
+			_searcher.NodeClosed += _searcher_NodeClosed;
+			_searcher.PathNodeFound += _searcher_PathNodeFound;
+		}
+
+		private void _searcher_PathNodeFound(Vector2Int coord)
+		{
+			_map.SetPathCell(coord);
+		}
+
+		private void _searcher_NodeClosed(Vector2Int coord)
+		{
+			_map.SetClosedCell(coord);
+		}
+
+		private void _searcher_NodeOpened(Vector2Int coord)
+		{
+			_map.SetOpenedCell(coord);
+		}
+
+		private void UnsubscribeSearcher()
+		{
+			_searcher.SearchCompleted -= DemonstraightSearchResults;
 		}
 
 		private void Update()
@@ -98,14 +131,20 @@ namespace AStarDemo.Global
 				case SystemState.ShowResults:
 					UpdateShowResults();
 					break;
+				case SystemState.SearchFailed:
+					UpdateSearchFailed();
+					break;
 				default:
 					throw new NotImplementedException($"Unexpected state {_state}");
 			}
 		}
 
+		private void UpdateSearchFailed()
+		{
+		}
+
 		private void UpdateShowResults()
 		{
-			// Simply showing //
 		}
 
 		private void UpdateLookForBestPath()
@@ -114,8 +153,8 @@ namespace AStarDemo.Global
 				return;
 
 			var data = _map.GetData();
-			_searcher.SearchCompleted += ShowResults;
 
+			SubscribeSearcher();
 			_searcher.Start(data);
 		}
 

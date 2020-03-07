@@ -7,14 +7,19 @@ namespace AStarDemo.PathFinding
 {
 	public interface IPathFinder
 	{
-		event Action SearchCompleted;
+		event Action<bool> SearchCompleted;
+		event Action<Vector2Int> PathNodeFound;
+
+		event Action<Vector2Int> NodeOpened;
+		event Action<Vector2Int> NodeClosed;
+
 
 		bool IsInProgress { get; }
 
 		void Stop();
-		void Start(IMapData data);
+		void Start(MapData data);
 
-		IMapData GetResults();	
+		List<Vector2Int> GetResults();	
 	} 
 } 
 

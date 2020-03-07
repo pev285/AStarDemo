@@ -8,12 +8,12 @@ namespace AStarDemo.PathFinding
 	{
 		Empty = 0,
 		Obstacle = 1,
-		Start = 2,
-		Destination = 3,
-		PathPoint = 4,
+		//Start = 2,
+		//Destination = 3,
+		//PathPoint = 4,
 
-		Candidate = 5,
-		Evaluated = 6,
+		Open = 5,
+		Closed = 6,
 	} 
 } 
 

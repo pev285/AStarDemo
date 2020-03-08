@@ -92,14 +92,14 @@ namespace AStarDemo.PathFinding
 			var current = _mapData.Destination.Value;
 			
 			_foundPath.Add(current);
+			PathNodeFound.Invoke(current);
 
 			while (current != start)
 			{
 				current = FindPreviousPathNode(current);
-				_foundPath.Add(current);
 
-				if (current != start)
-					PathNodeFound.Invoke(current);
+				_foundPath.Add(current);
+				PathNodeFound.Invoke(current);
 			}
 
 			_foundPath.Reverse();

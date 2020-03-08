@@ -77,9 +77,8 @@ namespace AStarDemo.Global
 		{
 			UnsubscribeSearcher();
 
-			var data = _map.GetData();
-			_map.SetStartCell(data.Start.Value);
-			_map.SetDestinationCell(data.Destination.Value);
+			var path = _searcher.GetResults();
+			_map.DrawPath(path);
 
 			if (successful)
 				TransitionTo(SystemState.ShowResults);

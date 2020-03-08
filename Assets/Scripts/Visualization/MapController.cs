@@ -80,15 +80,25 @@ namespace AStarDemo.Visualization
         public void SetStart(Vector2 position)
         {
             var coords = _mapVisualization.GetCoordsByViewPoint(position);
-
             SetStartCell(coords);
         }
 
         public void SetDestination(Vector2 position)
         {
             var coords = _mapVisualization.GetCoordsByViewPoint(position);
-
             SetDestinationCell(coords);
+        }
+
+        public void DrawPath(List<Vector2Int> path)
+        {
+            var start = path[0];
+            var dest = path[path.Count-1];
+
+            foreach (var node in path)
+                ColorACell(node, _pathColor);
+
+            ColorACell(start, _startColor);
+            ColorACell(dest, _destinationColor);
         }
 
         public void SetStartCell(Vector2Int coords)

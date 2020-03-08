@@ -77,9 +77,6 @@ namespace AStarDemo.Global
 		{
 			UnsubscribeSearcher();
 
-			var path = _searcher.GetResults();
-			_map.DrawPath(path);
-
 			if (successful)
 				TransitionTo(SystemState.ShowResults);
 			else
@@ -137,6 +134,8 @@ namespace AStarDemo.Global
 				case SystemState.SearchFailed:
 					UpdateSearchFailed();
 					break;
+				case SystemState.DoNothing:
+					break;
 				default:
 					throw new NotImplementedException($"Unexpected state {_state}");
 			}
@@ -144,10 +143,15 @@ namespace AStarDemo.Global
 
 		private void UpdateSearchFailed()
 		{
+			TransitionTo(SystemState.DoNothing);
 		}
 
 		private void UpdateShowResults()
 		{
+			var path = _searcher.GetResults();
+			_map.DrawPath(path);
+
+			TransitionTo(SystemState.DoNothing);
 		}
 
 		private void UpdateLookForBestPath()

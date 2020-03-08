@@ -29,5 +29,11 @@ namespace AStarDemo.Global
             public static Func<float> GetWorldHeight = () => 0;
             public static Func<float> GetMinDimension = () => 0;
         }
+
+        public static class Map
+        {
+            public static Action<Vector2Int> StartPositionChosen = (a) => { };
+            public static Action<Vector2Int> DestinationPositionChosen = (a) => { };
+        }
     }
 }

@@ -29,19 +29,33 @@ namespace AStarDemo.UserInteractions
 
 		private void Awake()
 		{
-			MessageBuss.Global.SystemStateChanged += HandleStateChange;
-		}
-
-		private void Start()
-		{
 			_nextButton.onClick.AddListener(NotifyNextPressed);
 			_startOverButton.onClick.AddListener(NotifyStartOver);
+
+			MessageBuss.Global.SystemStateChanged += HandleStateChange;
+
+			MessageBuss.Map.StartPositionChosen += UnblockNextButton;
+			MessageBuss.Map.DestinationPositionChosen += UnblockNextButton;
 		}
 
 		private void HandleStateChange(SystemState state)
 		{
-			_stateText.text = _hints[state];
+			if (_hints.ContainsKey(state))
+				_stateText.text = _hints[state];
+
+			if ((state == SystemState.LocateStart || state == SystemState.LocateDestination)
+				|| state == SystemState.LookForBestPath)
+				_nextButton.interactable = false;
+
+			if (state == SystemState.LocateObstacles)
+				_nextButton.interactable = true;
 		}
+
+		private void UnblockNextButton(Vector2Int node)
+		{
+			_nextButton.interactable = true;
+		}
+
 
 		private void NotifyStartOver()
 		{
@@ -59,10 +73,10 @@ namespace AStarDemo.UserInteractions
 			_startOverButton.onClick.RemoveListener(NotifyStartOver);
 
 			MessageBuss.Global.SystemStateChanged -= HandleStateChange;
+
+			MessageBuss.Map.StartPositionChosen += UnblockNextButton;
+			MessageBuss.Map.DestinationPositionChosen += UnblockNextButton;
 		}
-
-
-
 	} 
 } 
 

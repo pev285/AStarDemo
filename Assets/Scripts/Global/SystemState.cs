@@ -12,6 +12,8 @@ namespace AStarDemo.Global
 		LookForBestPath,
 		ShowResults,
 		SearchFailed,
+
+		DoNothing,
 	}
 } 
 

@@ -50,27 +50,36 @@ namespace AStarDemo.PathFinding
 			IsInProgress = false;
 		}
 
+		public void Reset(int width, int height)
+		{
+			_frontLine.Clear();
+			_foundPath.Clear();
+			ResetPaths(width, height);
+		}
+
 		public void Start(MapData data)
 		{
-			_mapData = data;
-			_frontLine.Clear();
+			Reset(data.Width, data.Height);
+			Initialize(data);
 
-			var start = _mapData.Start.Value;
-
-			ResetPaths(start);
-			_frontLine.Add(start);
-
-			//var go = new GameObject().GetComponent<Transform>();
-			//go.StartCoroutine()
 			CalculationProcess();
 		}
 
-		private void ResetPaths(Vector2Int start)
+		private void Initialize(MapData data)
 		{
-			_calculatedPaths = new int[_mapData.Width, _mapData.Height];
+			_mapData = data;
+			var start = _mapData.Start.Value;
 
-			for (int x = 0; x < _mapData.Width; x++)
-				for (int y = 0; y < _mapData.Height; y++)
+			_frontLine.Add(start);
+			_calculatedPaths[start.x, start.y] = 0;
+		}
+
+		private void ResetPaths(int width, int height)
+		{
+			_calculatedPaths = new int[width, height];
+
+			for (int x = 0; x < width; x++)
+				for (int y = 0; y < height; y++)
 					_calculatedPaths[x, y] = int.MaxValue;
 		}
 

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AStarDemo
+namespace AStarDemo.Global
 {
 	public class ScreenDimensions : MonoBehaviour 
 	{
@@ -30,10 +30,6 @@ namespace AStarDemo
 			_width = _height * _camera.aspect;
 
 			_min = Mathf.Min(_width, _height);
-		}
-
-		private void Start()
-		{
 		}
 
 		private void OnDestroy()

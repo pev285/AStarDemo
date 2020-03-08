@@ -114,6 +114,8 @@ namespace AStarDemo.Visualization
 
             _map.SetStart(coords);
             ColorACell(coords, _startColor);
+
+            MessageBuss.Map.StartPositionChosen(coords);
         }
 
         public void SetDestinationCell(Vector2Int coords)
@@ -129,6 +131,8 @@ namespace AStarDemo.Visualization
 
             _map.SetDestination(coords);
             ColorACell(coords, _destinationColor);
+
+            MessageBuss.Map.DestinationPositionChosen(coords);
         }
 
         public void SetOpenedCell(Vector2Int coords)
